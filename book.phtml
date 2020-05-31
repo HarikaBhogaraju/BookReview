@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  </head>
+  <body class="brown darken-1" >
+    <nav>
+    <div class="nav-wrapper brown lighten-1">
+      <a href="home.phtml" class="brand-logo right">
+        <?php
+        session_start();
+        echo $_SESSION["username"];
+        ?></a>
+
+        <a href="#" class="brand-logo right" style="font-family:georgia;color:white;text-align:center"></a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a>
+          <?php
+          session_start();
+          if($_SESSION['username'] == true) {
+            echo '<a href="logout.php"><span>Logout</span></a>';
+          }
+          else {
+            echo '<a href="login.php"><span>Login</span></a>';
+          }
+          ?>
+      </a></li>
+      </ul>
+    </div>
+    </nav>
+    <div style="font-family:georgia;color:white;text-align:center">
+      <h1>Book Review</h1>
+        <div class="row">
+          <h4>
+            <?php
+              $book = $_GET['Book'];
+              echo $book;
+             ?>
+             <a class="btn-floating btn-large waves-effect waves-light brown lighten-1" href="addReview.html"><i class="material-icons">add</i></a>
+          </h4>
+        </div>
+        <div class="row">
+          <div class="col s6 offset-s4">
+              <?php
+              $search = $_POST["search"];
+              include('config.php');
+              //$sql = "DELETE FROM myDB.Users WHERE username = 'harika14'";
+              $sql = "SELECT * FROM myDB.Reviews WHERE book = '$book' ";
+              $result = mysqli_query($conn,$sql);
+
+              if (!mysqli_query($conn,$sql)){
+                die('Error: ' . mysqli_error($conn));
+              }
+              else{
+                while($row = $result->fetch_assoc()){
+                  ?>
+                  <div class="row">
+                   <div class="col s6 offset-s1">
+                     <div class="card-panel white black-text">
+                       <h4>
+                         <?php
+                            echo $row['username'];
+                          ?>
+                       </h4>
+                       <span >
+                       <?php
+                          echo $row['revDescription'];
+                        ?>
+                       </span>
+                     </div>
+                   </div>
+                 </div>
+                 <?php
+                }
+              }
+            ?>
+          </div>
+        </div>
+  </body>
+
+</html>
