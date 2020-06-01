@@ -14,16 +14,16 @@
   </head>
 
 <div>
-  <body class="amber lighten-5" style="background-repeat:no-repeat;background-size:cover;">
+  <body class="brown darken-1" style="background-repeat:no-repeat;background-size:cover;">
     <nav>
-    <div class="nav-wrapper brown darken-1">
+    <div class="nav-wrapper brown lighten-1">
       <a href="#" class="brand-logo right">
         <?php
         session_start();
         echo $_SESSION["username"];
         ?></a>
 
-        <a href="#" class="brand-logo right" style="font-family:georgia;color:ivory;text-align:center"></a>
+        <a href="#" class="brand-logo right" style="font-family:georgia;text-align:center"></a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li><a>
           <?php
@@ -40,9 +40,9 @@
     </div>
   </nav>
 
-    <div class="brown-text text-darken-1" style="font-family:georgia;text-align:center;background-size:cover;">
+    <div class="amber-text text-lighten-5" style="font-family:georgia;text-align:center;background-size:cover;">
 
-              <h1>Tattered Pages</h1>
+              <h1 style="">Tattered Pages</h1>
               <h4>Find your book
               <a class="btn-floating btn-large waves-effect waves-light brown darken-1" href="addNewBook.phtml"><i class="material-icons">add</i></a>
               </h4>
@@ -60,7 +60,6 @@
                     <?php
                     $search = $_POST["search"];
                     include('config.php');
-                    //$sql = "DELETE FROM myDB.Users WHERE username = 'harika14'";
                     if(isset($_POST['submit'])){
                     $sql = "SELECT * FROM myDB.Books WHERE Book LIKE '%".$search."%' OR Author LIKE '%".$search."%'
                    OR Genre LIKE '%".$search."%'";
